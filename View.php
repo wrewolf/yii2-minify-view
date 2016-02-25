@@ -441,7 +441,13 @@ class View extends \yii\web\View
             }
 
             if (!empty($url)) {
-                $result = file_get_contents($url);
+                $arrContextOptions = [
+                    "ssl" => [
+                        "verify_peer"      => false,
+                        "verify_peer_name" => false,
+                    ],
+                ];
+                $result = file_get_contents($url, false, stream_context_create($arrContextOptions));
             }
         }
 
